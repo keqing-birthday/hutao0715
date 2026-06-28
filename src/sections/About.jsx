@@ -33,8 +33,7 @@ export default function About() {
                     )}
                   </div>
                   <h3 className="text-title text-lg text-paper mb-1">{member.name}</h3>
-                  <p className="text-plum text-sm mb-3">{member.role}</p>
-                  <p className="text-paper-dim text-sm leading-relaxed">{member.bio}</p>
+                  <p className="text-plum text-sm">{member.role}</p>
                 </div>
               </TalismanCard>
             )
