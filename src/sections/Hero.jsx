@@ -51,7 +51,7 @@ export default function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="#recruitment">
-            <Button>立即加入招募</Button>
+            <Button showFire={false}>立即加入招募</Button>
           </a>
           <a href="#about">
             <Button variant="secondary">了解我们</Button>
