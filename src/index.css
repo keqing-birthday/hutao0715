@@ -1,26 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  /* 色彩体系 —— 雅致水墨 */
-  --color-ink: #f7f2e8;
-  --color-card: #fffdf8;
-  --color-card-border: #e8dfd3;
-  --color-plum: #b53a2a;
-  --color-earth: #a67c2e;
-  --color-paper: #3e2723;
-  --color-paper-dim: #6d5f58;
-  --color-fire: #d94e36;
-  --color-ghost: #7b68ee;
-
-  /* 字体 */
-  --font-serif: "Noto Serif SC", "Songti SC", "STSong", serif;
-  --font-sans: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
-
-  /* 不对称圆角 */
-  --radius-btn: 8px 20px 8px 20px;
-  --radius-input: 8px 16px 8px 16px;
-  --radius-tag: 4px 12px 4px 12px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   html {
@@ -81,159 +61,48 @@
   }
 }
 
-/* 按钮火焰动画 */
-@keyframes flame-pulse {
-  0% {
-    transform: scale(1) rotate(-5deg);
+@layer utilities {
+  /* 按钮光效伪元素 */
+  .btn-primary {
+    position: relative;
+    overflow: hidden;
   }
-  100% {
-    transform: scale(1.2) rotate(5deg);
-  }
-}
 
-/* 光效滑入 */
-@keyframes glow-slide {
-  0% {
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
     left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    transform: skewX(-25deg);
+    transition: none;
   }
-  100% {
-    left: 100%;
-  }
-}
 
-/* 梅花飘落 */
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh) translateX(0) rotate(0deg);
-    opacity: 0;
+  .btn-primary:hover::before {
+    animation: glow-slide 0.7s ease forwards;
   }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(110vh) translateX(30px) rotate(360deg);
-    opacity: 0;
-  }
-}
 
-/* 幽灵漂浮 */
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.3;
+  .text-display {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-weight: 900;
   }
-  25% {
-    transform: translate(20px, -30px) scale(1.05);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translate(-10px, -60px) scale(0.95);
-    opacity: 0.3;
-  }
-  75% {
-    transform: translate(-30px, -30px) scale(1.02);
-    opacity: 0.35;
-  }
-}
 
-/* 蝴蝶飞舞 */
-@keyframes butterfly {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
+  .text-title {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-weight: 700;
   }
-  20% {
-    transform: translate(30px, -20px) rotate(10deg);
+
+  .text-decorative {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-weight: 400;
   }
-  40% {
-    transform: translate(-20px, -40px) rotate(-15deg);
-  }
-  60% {
-    transform: translate(40px, -10px) rotate(20deg);
-  }
-  80% {
-    transform: translate(-30px, -30px) rotate(-10deg);
-  }
-}
-
-/* 入场 fade-up */
-@keyframes fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 灯笼漂浮 */
-@keyframes lantern-float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.15;
-  }
-  50% {
-    transform: translateY(-20px) scale(1.05);
-    opacity: 0.25;
-  }
-}
-
-.animate-flame {
-  animation: flame-pulse 0.5s ease-in-out infinite alternate;
-}
-
-.animate-fall {
-  animation: fall linear infinite;
-}
-
-.animate-float {
-  animation: float 20s ease-in-out infinite;
-}
-
-.animate-butterfly {
-  animation: butterfly 18s ease-in-out infinite;
-}
-
-.animate-fade-up {
-  animation: fade-up 0.8s ease-out both;
-}
-
-.animate-lantern {
-  animation: lantern-float 6s ease-in-out infinite;
-}
-
-/* 按钮光效伪元素 */
-.btn-primary {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: skewX(-25deg);
-  transition: none;
-}
-
-.btn-primary:hover::before {
-  animation: glow-slide 0.7s ease forwards;
 }
 
 /* 滚动条 —— WebKit + Firefox */
@@ -259,18 +128,12 @@ html {
   scrollbar-color: #e8dfd3 #f7f2e8;
 }
 
-/* 响应式字体 */
-.text-display {
-  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-  font-weight: 900;
-}
-
-.text-title {
-  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-  font-weight: 700;
-}
-
-.text-decorative {
-  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-  font-weight: 400;
+/* 光效滑入 */
+@keyframes glow-slide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
