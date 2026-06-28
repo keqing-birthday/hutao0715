@@ -25,7 +25,11 @@ export default function Navbar() {
             href="#"
             className="flex items-center gap-2 text-plum font-bold text-lg hover:opacity-90 transition-opacity"
           >
-            <span className="text-2xl">🎩</span>
+            <img
+              src="/ghost.png"
+              alt="胡桃生日会"
+              className="h-8 w-8 object-contain"
+            />
             <span className="text-title">胡桃生日会</span>
           </a>
 
