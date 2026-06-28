@@ -1,11 +1,5 @@
+import { members } from '../data/members'
 import TalismanCard from '../components/ui/TalismanCard'
-
-const members = [
-  { name: '化名一', role: '主催 / 策划', bio: '统筹生日会整体进度，梦想是让胡桃被全世界看见。' },
-  { name: '化名二', role: '美术负责人', bio: '负责视觉风格把控，让梅花与火焰在画面中起舞。' },
-  { name: '化名三', role: '文案 / 写手', bio: '执笔角色台词与活动策划，擅长古灵精怪的叙事。' },
-  { name: '化名四', role: '技术 / 网站', bio: '搭建本网站，让祝福与作品有一个温暖的家。' },
-]
 
 export default function About() {
   return (
@@ -22,19 +16,45 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {members.map((member) => (
-            <TalismanCard key={member.name}>
-              <div className="flex flex-col items-center text-center">
-                {/* 头像占位 */}
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-plum/20 to-earth/20 flex items-center justify-center mb-4 border-2 border-plum/25">
-                  <span className="text-2xl">🎩</span>
+          {members.map((member) => {
+            const cardBody = (
+              <TalismanCard className="h-full transition-transform duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center text-center">
+                  {/* 头像 */}
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-plum/20 to-earth/20 flex items-center justify-center mb-4 border-2 border-plum/25 overflow-hidden">
+                    {member.avatar ? (
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-2xl">🎩</span>
+                    )}
+                  </div>
+                  <h3 className="text-title text-lg text-paper mb-1">{member.name}</h3>
+                  <p className="text-plum text-sm mb-3">{member.role}</p>
+                  <p className="text-paper-dim text-sm leading-relaxed">{member.bio}</p>
                 </div>
-                <h3 className="text-title text-lg text-paper mb-1">{member.name}</h3>
-                <p className="text-plum text-sm mb-3">{member.role}</p>
-                <p className="text-paper-dim text-sm leading-relaxed">{member.bio}</p>
+              </TalismanCard>
+            )
+
+            return member.bilibili ? (
+              <a
+                key={member.name}
+                href={member.bilibili}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-plum rounded-xl"
+              >
+                {cardBody}
+              </a>
+            ) : (
+              <div key={member.name} className="h-full">
+                {cardBody}
               </div>
-            </TalismanCard>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
