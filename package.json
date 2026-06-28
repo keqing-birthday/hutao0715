@@ -23,5 +23,11 @@
     "globals": "^15.14.0",
     "tailwindcss": "^4.0.0",
     "vite": "^6.1.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

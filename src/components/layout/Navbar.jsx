@@ -14,6 +14,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: 'linear-gradient(to bottom, rgba(247,242,232,0.98), transparent)',
+        WebkitBackdropFilter: 'blur(10px)',
         backdropFilter: 'blur(10px)',
       }}
     >

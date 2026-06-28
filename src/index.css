@@ -236,7 +236,7 @@
   animation: glow-slide 0.7s ease forwards;
 }
 
-/* 滚动条 */
+/* 滚动条 —— WebKit + Firefox */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -252,6 +252,11 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b53a2a;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #e8dfd3 #f7f2e8;
 }
 
 /* 响应式字体 */
