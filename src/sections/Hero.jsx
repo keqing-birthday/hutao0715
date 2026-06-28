@@ -50,7 +50,9 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button>立即加入招募</Button>
+          <a href="#recruitment">
+            <Button>立即加入招募</Button>
+          </a>
           <a href="#about">
             <Button variant="secondary">了解我们</Button>
           </a>

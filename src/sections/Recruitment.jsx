@@ -1,6 +1,5 @@
 import { Paintbrush, Video, PenTool, Wrench } from 'lucide-react'
 import Card from '../components/ui/Card'
-import Button from '../components/ui/Button'
 import Tag from '../components/ui/Tag'
 
 const roles = [
@@ -62,10 +61,6 @@ export default function Recruitment() {
               </Card>
             )
           })}
-        </div>
-
-        <div className="text-center">
-          <Button variant="secondary">查看全部招募</Button>
         </div>
       </div>
     </section>
