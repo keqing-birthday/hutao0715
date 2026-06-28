@@ -1,13 +1,6 @@
 export default function Footer() {
   return (
     <footer className="relative bg-ink pt-16 pb-8 overflow-hidden">
-      {/* 顶部装饰文字 */}
-      <div className="absolute top-4 left-0 right-0 text-center pointer-events-none select-none">
-        <p className="text-decorative text-4xl md:text-6xl text-paper/[0.06] tracking-[0.5em]">
-          彼岸花開，生死兩隔
-        </p>
-      </div>
-
       {/* 彼岸花装饰 */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
         <div className="absolute bottom-0 left-[10%] text-6xl opacity-15">🌺</div>

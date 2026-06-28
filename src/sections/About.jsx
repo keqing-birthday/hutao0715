@@ -36,13 +36,6 @@ export default function About() {
             </TalismanCard>
           ))}
         </div>
-
-        {/* 彼岸花装饰文字 */}
-        <div className="text-center">
-          <p className="text-decorative text-2xl md:text-3xl text-plum/30 tracking-widest">
-            彼岸花開，生死兩隔
-          </p>
-        </div>
       </div>
     </section>
   )
