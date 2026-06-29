@@ -17,6 +17,7 @@ import {
 import { useTheme } from '../../hooks/useTheme'
 
 const navLinks = [
+  { label: '首页', href: '#', icon: Home },
   { label: '招募大厅', href: '#recruitment', icon: ScrollText },
   { label: '关于我们', href: '#about', icon: Users },
 ]
