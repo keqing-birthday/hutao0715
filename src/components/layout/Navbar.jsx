@@ -7,6 +7,7 @@ import {
   Music,
   Sun,
   Moon,
+  Monitor,
   Play,
   Pause,
   Volume2,
@@ -22,7 +23,26 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [playerOpen, setPlayerOpen] = useState(false)
-  const { resolvedTheme, toggle } = useTheme()
+  const { theme, resolvedTheme, setTheme } = useTheme()
+  const [themeOpen, setThemeOpen] = useState(false)
+  const themePopoverRef = useRef(null)
+
+  useEffect(() => {
+    if (!themeOpen) return
+    const handle = (e) => {
+      if (themePopoverRef.current && !themePopoverRef.current.contains(e.target)) {
+        setThemeOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handle)
+    return () => document.removeEventListener('mousedown', handle)
+  }, [themeOpen])
+
+  const themeOptions = [
+    { key: 'light', label: '浅色模式', icon: Sun },
+    { key: 'dark', label: '深色模式', icon: Moon },
+    { key: 'system', label: '跟随系统', icon: Monitor },
+  ]
 
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -153,17 +173,64 @@ export default function Navbar() {
             )}
           </button>
 
-          <button
-            className="btn-plain hidden md:flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors"
-            aria-label={resolvedTheme === 'dark' ? '切换为浅色模式' : '切换为深色模式'}
-            onClick={() => toggle()}
-          >
-            {resolvedTheme === 'dark' ? (
-              <Sun size={18} strokeWidth={1.9} />
-            ) : (
-              <Moon size={18} strokeWidth={1.9} />
+          {/* Theme selector */}
+          <div className="relative hidden md:block" ref={themePopoverRef}>
+            <button
+              className="btn-plain flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors"
+              aria-label="切换主题"
+              aria-haspopup="menu"
+              aria-expanded={themeOpen}
+              onClick={() => setThemeOpen((o) => !o)}
+            >
+              {resolvedTheme === 'dark' ? (
+                <Moon size={18} strokeWidth={1.9} />
+              ) : (
+                <Sun size={18} strokeWidth={1.9} />
+              )}
+            </button>
+
+            {themeOpen && (
+              <div
+                role="menu"
+                className="absolute top-full right-0 mt-2 w-56 p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)] bg-card/95 animate-fade-up"
+                style={{
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                }}
+              >
+                {themeOptions.map(({ key, label, icon: Icon }) => {
+                  const active = theme === key
+                  return (
+                    <button
+                      key={key}
+                      role="menuitem"
+                      onClick={() => {
+                        setTheme(key)
+                        setThemeOpen(false)
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors ${
+                        active
+                          ? 'bg-plum/10 text-plum'
+                          : 'text-paper-dim hover:bg-plum/[0.06] hover:text-plum'
+                      }`}
+                    >
+                      <span
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                          active ? 'bg-plum/15 text-plum' : 'bg-ink text-paper-dim'
+                        }`}
+                      >
+                        <Icon size={18} strokeWidth={1.9} />
+                      </span>
+                      <span className="text-sm font-medium">{label}</span>
+                      {active && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-plum" />
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
             )}
-          </button>
+          </div>
 
           {/* Mobile menu button */}
           <button
@@ -268,27 +335,30 @@ export default function Navbar() {
                 </li>
               )
             })}
-            <li>
-              <button
-                className="btn-plain w-full flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
-                onClick={() => {
-                  toggle()
-                  setOpen(false)
-                }}
-                aria-label={resolvedTheme === 'dark' ? '切换为浅色模式' : '切换为深色模式'}
-              >
-                {resolvedTheme === 'dark' ? (
-                  <>
-                    <Sun size={17} strokeWidth={1.9} />
-                    <span>浅色模式</span>
-                  </>
-                ) : (
-                  <>
-                    <Moon size={17} strokeWidth={1.9} />
-                    <span>深色模式</span>
-                  </>
-                )}
-              </button>
+            <li className="pt-1">
+              <p className="px-4 pb-2 text-xs text-paper-dim/60">主题</p>
+              <div className="grid grid-cols-3 gap-2 px-2">
+                {themeOptions.map(({ key, label, icon: Icon }) => {
+                  const active = theme === key
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => {
+                        setTheme(key)
+                        setOpen(false)
+                      }}
+                      className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border text-xs font-medium transition-colors ${
+                        active
+                          ? 'bg-plum/10 border-plum/50 text-plum'
+                          : 'bg-card/50 border-card-border/60 text-paper-dim hover:border-plum/40 hover:text-plum'
+                      }`}
+                    >
+                      <Icon size={18} strokeWidth={1.9} />
+                      <span>{label}</span>
+                    </button>
+                  )
+                })}
+              </div>
             </li>
           </ul>
         </div>

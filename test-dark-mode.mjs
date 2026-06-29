@@ -73,11 +73,23 @@ async function getDetailedState(page) {
     log('Initial', await getDetailedState(page))
     await capture(page, '01-initial')
 
-    await page.locator('button[aria-label="切换为深色模式"], button[aria-label="切换为浅色模式"]').first().click()
+    // Open theme selector and choose dark mode
+    await page.locator('button[aria-label="切换主题"]').click()
+    await page.waitForTimeout(200)
+    await page.getByRole('menuitem', { name: '深色模式' }).click()
     await page.waitForTimeout(800)
 
-    log('After toggle', await getDetailedState(page))
-    await capture(page, '02-after-toggle')
+    log('After dark', await getDetailedState(page))
+    await capture(page, '02-after-dark')
+
+    // Open theme selector and choose system mode
+    await page.locator('button[aria-label="切换主题"]').click()
+    await page.waitForTimeout(200)
+    await page.getByRole('menuitem', { name: '跟随系统' }).click()
+    await page.waitForTimeout(800)
+
+    log('After system', await getDetailedState(page))
+    await capture(page, '03-after-system')
 
     console.log('\nDone.')
   } catch (err) {
