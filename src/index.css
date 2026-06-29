@@ -9,14 +9,12 @@
 
   body {
     @apply bg-ink text-paper font-sans antialiased;
-    background-color: #f7f2e8;
-    color: #3e2723;
     font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
   }
 
   ::selection {
-    background-color: rgba(181, 58, 42, 0.25);
-    color: #3e2723;
+    background-color: rgba(var(--color-plum), 0.25);
+    color: rgb(var(--color-paper));
   }
 }
 
@@ -27,9 +25,9 @@
     background: linear-gradient(
       90deg,
       transparent,
-      #b53a2a,
-      #a67c2e,
-      #b53a2a,
+      rgb(var(--color-plum)),
+      rgb(var(--color-earth)),
+      rgb(var(--color-plum)),
       transparent
     );
   }
@@ -42,7 +40,12 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #b53a2a, #a67c2e, #b53a2a);
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-plum)),
+      rgb(var(--color-earth)),
+      rgb(var(--color-plum))
+    );
     border-radius: 3px 3px 0 0;
   }
 
@@ -54,7 +57,7 @@
     right: 0;
     width: 40px;
     height: 2px;
-    background: #b53a2a;
+    background: rgb(var(--color-plum));
     transform: rotate(-45deg);
     transform-origin: right center;
     opacity: 0.5;
@@ -103,6 +106,33 @@
     font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
     font-weight: 400;
   }
+
+  /* MoonEdge 风格按钮底纹缩放动效 */
+  .btn-plain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .btn-plain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: rgba(var(--color-plum), 0.08);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out;
+    z-index: -1;
+  }
+
+  .btn-plain:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .btn-plain:active::before {
+    background-color: rgba(var(--color-plum), 0.12);
+  }
 }
 
 /* 滚动条 —— WebKit + Firefox */
@@ -111,21 +141,21 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f7f2e8;
+  background: rgb(var(--color-ink));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e8dfd3;
+  background: rgb(var(--color-card-border));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b53a2a;
+  background: rgb(var(--color-plum));
 }
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: #e8dfd3 #f7f2e8;
+  scrollbar-color: rgb(var(--color-card-border)) rgb(var(--color-ink));
 }
 
 /* 光效滑入 */

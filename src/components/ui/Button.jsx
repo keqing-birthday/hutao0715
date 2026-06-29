@@ -12,13 +12,13 @@ export default function Button({
 
   const variants = {
     primary: cn(
-      'btn-primary bg-plum text-paper shadow-[0_4px_15px_rgba(181,58,42,0.25)]',
-      'hover:bg-fire hover:shadow-[0_6px_25px_rgba(217,78,54,0.45)]',
+      'btn-primary bg-plum text-paper shadow-[0_4px_15px_rgba(var(--color-plum),0.25)]',
+      'hover:bg-fire hover:shadow-[0_6px_25px_rgba(var(--color-fire),0.45)]',
       'active:scale-95'
     ),
     secondary: cn(
       'bg-transparent border-2 border-plum text-plum',
-      'hover:bg-plum/8 hover:shadow-[inset_0_0_15px_rgba(181,58,42,0.15)]',
+      'hover:bg-plum/8 hover:shadow-[inset_0_0_15px_rgba(var(--color-plum),0.15)]',
       'active:scale-95'
     ),
   }

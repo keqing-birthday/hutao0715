@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-const colors = ['#e0665a', '#f2a6a0', '#e8c4c0']
+const petalVars = ['var(--petal-1)', 'var(--petal-2)', 'var(--petal-3)']
 
 export default function PlumBlossoms() {
   const petals = useMemo(() => {
@@ -8,7 +8,7 @@ export default function PlumBlossoms() {
       id: i,
       left: `${Math.random() * 100}%`,
       size: 8 + Math.random() * 8,
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: petalVars[Math.floor(Math.random() * petalVars.length)],
       duration: 8 + Math.random() * 5,
       delay: Math.random() * 10,
       sway: Math.random() * 40 - 20,

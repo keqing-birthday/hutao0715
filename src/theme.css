@@ -1,0 +1,43 @@
+:root {
+  /* 浅色模式：雅致水墨 */
+  --color-ink: 247 242 232;
+  --color-card: 255 253 248;
+  --color-card-border: 232 223 211;
+  --color-plum: 181 58 42;
+  --color-earth: 166 124 46;
+  --color-paper: 62 39 35;
+  --color-paper-dim: 109 95 88;
+  --color-fire: 217 78 54;
+  --color-ghost: 123 104 238;
+  --color-shade: 62 39 35;
+
+  --hero-glow: rgba(var(--color-plum), 0.18);
+  --hero-text-glow: 0 0 10px rgba(var(--color-plum), 0.35),
+    0 0 40px rgba(var(--color-plum), 0.15);
+
+  --petal-1: #e0665a;
+  --petal-2: #f2a6a0;
+  --petal-3: #e8c4c0;
+}
+
+.dark {
+  /* 深色模式：黑棕底色 */
+  --color-ink: 26 18 15;
+  --color-card: 35 24 19;
+  --color-card-border: 61 43 34;
+  --color-plum: 194 59 34;
+  --color-earth: 196 154 76;
+  --color-paper: 245 239 230;
+  --color-paper-dim: 184 169 154;
+  --color-fire: 232 93 62;
+  --color-ghost: 155 139 247;
+  --color-shade: 0 0 0;
+
+  --hero-glow: rgba(var(--color-plum), 0.22);
+  --hero-text-glow: 0 0 12px rgba(var(--color-plum), 0.45),
+    0 0 48px rgba(var(--color-plum), 0.2);
+
+  --petal-1: #c23b22;
+  --petal-2: #e0665a;
+  --petal-3: #f2a6a0;
+}

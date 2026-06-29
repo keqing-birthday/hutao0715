@@ -10,7 +10,7 @@ export default function Hero() {
       {/* 背景光晕 */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(181,58,42,0.18), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, var(--hero-glow), transparent 70%)' }}
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center animate-fade-up">
@@ -25,7 +25,7 @@ export default function Hero() {
             className="inline-block text-plum"
             style={{
               transform: 'rotate(-3deg)',
-              textShadow: '0 0 10px rgba(181,58,42,0.35), 0 0 40px rgba(181,58,42,0.15)',
+              textShadow: 'var(--hero-text-glow)',
             }}
           >
             雪
@@ -33,7 +33,7 @@ export default function Hero() {
           <span
             className="inline-block text-paper"
             style={{
-              textShadow: '0 0 10px rgba(181,58,42,0.35), 0 0 40px rgba(181,58,42,0.15)',
+              textShadow: 'var(--hero-text-glow)',
             }}
           >
             霁梅香
@@ -62,7 +62,7 @@ export default function Hero() {
       {/* 底部渐变过渡 */}
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{ background: 'linear-gradient(to top, #f7f2e8, transparent)' }}
+        style={{ background: 'linear-gradient(to top, rgb(var(--color-ink)), transparent)' }}
       />
     </section>
   )

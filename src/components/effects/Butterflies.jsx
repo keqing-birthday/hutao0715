@@ -21,7 +21,7 @@ export default function Butterflies({ count = 5, className = '' }) {
             animationDelay: `${b.delay}s`,
             animationDuration: `${b.duration}s`,
             opacity: 0.35,
-            filter: 'drop-shadow(0 0 4px rgba(181,58,42,0.25))',
+            filter: 'drop-shadow(0 0 4px rgba(var(--color-plum),0.25))',
           }}
         >
           🦋

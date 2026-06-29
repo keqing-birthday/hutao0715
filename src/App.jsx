@@ -10,7 +10,7 @@ function App() {
     <div className="relative min-h-screen bg-ink text-paper overflow-x-hidden">
       <PlumBlossoms />
       <Navbar />
-      <main>
+      <main className="pt-20">
         <Hero />
         <Recruitment />
         <About />

@@ -1,5 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+function withAlpha(variable) {
+  return ({ opacityValue }) => {
+    if (opacityValue === undefined) {
+      return `rgb(var(${variable}))`
+    }
+    return `rgb(var(${variable}) / ${opacityValue})`
+  }
+}
+
 export default {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -7,15 +17,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#f7f2e8',
-        card: '#fffdf8',
-        'card-border': '#e8dfd3',
-        plum: '#b53a2a',
-        earth: '#a67c2e',
-        paper: '#3e2723',
-        'paper-dim': '#6d5f58',
-        fire: '#d94e36',
-        ghost: '#7b68ee',
+        ink: withAlpha('--color-ink'),
+        card: withAlpha('--color-card'),
+        'card-border': withAlpha('--color-card-border'),
+        plum: withAlpha('--color-plum'),
+        earth: withAlpha('--color-earth'),
+        paper: withAlpha('--color-paper'),
+        'paper-dim': withAlpha('--color-paper-dim'),
+        fire: withAlpha('--color-fire'),
+        ghost: withAlpha('--color-ghost'),
+        shade: withAlpha('--color-shade'),
       },
       fontFamily: {
         sans: ['"PingFang SC"', '"Microsoft YaHei"', '"Hiragino Sans GB"', 'sans-serif'],
@@ -25,6 +36,9 @@ export default {
         btn: '8px 20px 8px 20px',
         input: '8px 16px 8px 16px',
         tag: '4px 12px 4px 12px',
+      },
+      spacing: {
+        18: '4.5rem',
       },
       animation: {
         flame: 'flame-pulse 0.5s ease-in-out infinite alternate',

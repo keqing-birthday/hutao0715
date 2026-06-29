@@ -16,8 +16,8 @@ export default function TalismanCard({ children, className, ...props }) {
           className="relative bg-card/80 p-6 rounded-xl border border-plum/15"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(181,58,42,0.2) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(181,58,42,0.2) 1px, transparent 1px)
+              linear-gradient(to right, rgba(var(--color-plum),0.2) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(var(--color-plum),0.2) 1px, transparent 1px)
             `,
             backgroundSize: '100% 100%, 100% 100%',
           }}
