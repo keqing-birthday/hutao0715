@@ -1,31 +1,49 @@
-import { Paintbrush, Video, PenTool, Wrench } from 'lucide-react'
+import { Music, Film, Palette, PenTool, Drama, Mic, Sparkles } from 'lucide-react'
 import Card from '../components/ui/Card'
 import Tag from '../components/ui/Tag'
 
 const roles = [
   {
-    icon: Paintbrush,
-    title: '画师',
-    desc: '为生日会绘制插画、宣传图、周边设计等视觉作品。',
-    tags: ['插画', '立绘', 'Q版'],
+    icon: Music,
+    title: '音乐类',
+    desc: '负责生日会原创或改编曲目，包括作曲、编曲、乐器实录与混音。',
+    tags: ['编曲', '乐器', '混音'],
   },
   {
-    icon: Video,
-    title: 'MMD / 视频',
-    desc: '制作角色 MMD、手书、庆生视频等动态作品。',
-    tags: ['MMD', '手书', '剪辑'],
+    icon: Film,
+    title: '后期类',
+    desc: '完成视频剪辑、PV 制作、MMD 渲染等后期合成工作。',
+    tags: ['剪辑', 'PV', 'MMD'],
+  },
+  {
+    icon: Palette,
+    title: '美术类',
+    desc: '绘制同人图、手书分镜、动画分镜及视觉美术素材。',
+    tags: ['手书', '同人图', '动画分镜'],
   },
   {
     icon: PenTool,
-    title: '写手',
-    desc: '撰写同人文、文案、策划案、角色台词等内容。',
-    tags: ['同人文', '文案', '策划'],
+    title: '文案类',
+    desc: '撰写同人文、歌词填词、剧情脚本与角色台词等内容。',
+    tags: ['同人文', '填词', '剧情'],
   },
   {
-    icon: Wrench,
-    title: '后勤',
-    desc: '负责协调、宣发、资料整理、活动组织等幕后工作。',
-    tags: ['宣发', '统筹', '翻译'],
+    icon: Drama,
+    title: '扮演类',
+    desc: '出演真人小剧场、剧情演绎等需要出镜或配音表演的节目。',
+    tags: ['真人小剧场', '剧情演绎'],
+  },
+  {
+    icon: Mic,
+    title: '播音类',
+    desc: '为节目配音、担任主持或旁白，把控现场节奏与氛围。',
+    tags: ['配音', '主持'],
+  },
+  {
+    icon: Sparkles,
+    title: '其他',
+    desc: '任何好玩又有创意的形式，鬼畜、整活、彩蛋等统统欢迎。',
+    tags: ['鬼畜', '整活'],
   },
 ]
 
@@ -39,7 +57,7 @@ export default function Recruitment() {
             📋 招募大厅
           </h2>
           <p className="text-paper-dim max-w-2xl mx-auto">
-            生日会的筹备需要各路英才，无论你是画师、视频作者还是文案策划，都欢迎加入。
+            生日会的筹备需要各路英才，音乐、后期、美术、文案、扮演、播音……只要你想来，总有一个位置适合你。
           </p>
         </div>
 
