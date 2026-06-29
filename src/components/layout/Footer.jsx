@@ -85,15 +85,31 @@ export default function Footer() {
         </div>
 
         <h3 className="text-title text-lg md:text-xl text-paper mb-2">
-          胡桃生日会 · 往生堂第七十七代堂主
+          胡桃生日会
         </h3>
 
-        <p className="text-decorative text-paper-dim/80 text-lg italic mb-6">
-          「赤团开时斜飞去，最不安神晴又复雨」
+        <p className="text-paper-dim text-sm md:text-base mb-6">
+          往生堂第七十七代堂主 · 生贺组作品
         </p>
 
-        <p className="text-sm text-paper-dim/50">
-          本网站为同人非官方作品 · 仅供交流学习
+        <p className="text-sm text-paper-dim/80 mb-4">
+          本站为原神角色「胡桃」同人生日庆祝活动页面，非官方内容
+        </p>
+
+        <p className="text-sm text-paper-dim/80 mb-8">
+          由胡桃生贺组「引蝶杯」制作 · QQ群：693766057
+        </p>
+
+        <p className="text-xs text-paper-dim/50 mb-2">
+          © 2026 Hutao Birthday Fan Project. All rights reserved.
+        </p>
+
+        <p className="text-xs text-paper-dim/50 mb-1">
+          本网站为同人作品，所涉及的官方游戏角色、图像、音乐等素材版权归米哈游所有。
+        </p>
+
+        <p className="text-xs text-paper-dim/50">
+          Genshin Impact and Hutao are trademarks of miHoYo/HoYoverse. This is a fan-made project and is not affiliated with miHoYo.
         </p>
       </div>
     </footer>
