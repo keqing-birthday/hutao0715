@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import {
   Menu,
   X,
+  Home,
   ScrollText,
   Users,
   Music,
@@ -161,7 +162,7 @@ export default function Navbar() {
         </ul>
 
         {/* Right utilities */}
-        <div className="flex items-center gap-1 shrink-0">
+        <div className="flex items-center justify-end gap-1 shrink-0">
           <button
             className="btn-plain hidden md:flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors relative"
             aria-label={playerOpen ? '收起音乐播放器' : '展开音乐播放器'}
@@ -313,7 +314,7 @@ export default function Navbar() {
       {/* Mobile nav */}
       {open && (
         <div
-          className="md:hidden absolute top-full left-4 right-4 mt-2 p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.1)] bg-card/95 animate-fade-up"
+          className="md:hidden absolute top-full right-4 left-auto mt-2 w-72 max-w-[calc(100%-2rem)] p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.1)] bg-card/95 animate-fade-up"
           style={{
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
             backdropFilter: 'blur(20px) saturate(180%)',
@@ -335,6 +336,61 @@ export default function Navbar() {
                 </li>
               )
             })}
+            <li className="pb-3 border-b border-card-border/60">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-plum/10 flex items-center justify-center text-plum">
+                  <Music size={18} />
+                </div>
+                <div className="overflow-hidden">
+                  <p className="text-sm font-medium text-paper truncate">蝶语之言</p>
+                  <p className="text-xs text-paper-dim/60 truncate">羽小泠，夏翊然，LittleLiu</p>
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <input
+                  type="range"
+                  min={0}
+                  max={duration || 100}
+                  value={currentTime}
+                  onChange={handleSeek}
+                  className="w-full h-1 bg-card-border rounded-lg appearance-none cursor-pointer accent-plum"
+                />
+                <div className="flex justify-between text-xs text-paper-dim/50 mt-1">
+                  <span>{formatTime(currentTime)}</span>
+                  <span>{formatTime(duration)}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={togglePlay}
+                  className="w-10 h-10 rounded-full bg-plum text-paper hover:bg-fire transition-colors flex items-center justify-center"
+                  aria-label={isPlaying ? '暂停' : '播放'}
+                >
+                  {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={toggleMute}
+                    className="text-paper-dim hover:text-plum transition-colors"
+                    aria-label={isMuted ? '取消静音' : '静音'}
+                  >
+                    {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                  </button>
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.05}
+                    value={isMuted ? 0 : volume}
+                    onChange={handleVolumeChange}
+                    className="w-20 h-1 bg-card-border rounded-lg appearance-none cursor-pointer accent-plum"
+                  />
+                </div>
+              </div>
+            </li>
             <li className="pt-1">
               <p className="px-4 pb-2 text-xs text-paper-dim/60">主题</p>
               <div className="grid grid-cols-3 gap-2 px-2">
