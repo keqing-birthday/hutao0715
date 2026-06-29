@@ -17,7 +17,7 @@ export default function Button({
       'active:scale-95'
     ),
     secondary: cn(
-      'bg-transparent border-2 border-plum text-plum',
+      'bg-card/50 border-2 border-plum text-plum backdrop-blur-sm',
       'hover:bg-plum/8 hover:shadow-[inset_0_0_15px_rgba(var(--color-plum),0.15)]',
       'active:scale-95'
     ),

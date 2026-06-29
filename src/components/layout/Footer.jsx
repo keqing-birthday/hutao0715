@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
             {/* 群二维码 */}
             <div className="relative group">
-              <div className="p-2 bg-card rounded-xl border border-card-border shadow-sm">
+              <div className="p-2 bg-card/70 backdrop-blur-sm rounded-xl border border-card-border shadow-sm">
                 <img
                   src="/images/6639ec1cb1e5a01bac318e61e264a5b5_720.jpg"
                   alt="交流群二维码"
