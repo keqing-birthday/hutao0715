@@ -4,6 +4,7 @@ import PlumBlossoms from './components/effects/PlumBlossoms'
 import Hero from './sections/Hero'
 import Recruitment from './sections/Recruitment'
 import About from './sections/About'
+import OfflineEvents from './sections/OfflineEvents'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Recruitment />
         <About />
       </main>
+      <OfflineEvents />
       <Footer />
     </div>
   )
