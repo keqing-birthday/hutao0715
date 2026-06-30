@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 export default function ImageCarousel({
@@ -11,6 +12,10 @@ export default function ImageCarousel({
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % images.length)
+  }, [images.length])
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + images.length) % images.length)
   }, [images.length])
 
   useEffect(() => {
@@ -48,22 +53,25 @@ export default function ImageCarousel({
       {/* 渐变遮罩，让图片与卡片边框融合 */}
       <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-black/5 rounded-2xl" />
 
-      {/* 指示点 */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
-        {images.map((_, index) => (
+      {/* 左右切换按钮 */}
+      {images.length > 1 && (
+        <>
           <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={cn(
-              'w-2 h-2 rounded-full transition-all duration-300',
-              index === current
-                ? 'bg-plum w-5'
-                : 'bg-paper/50 hover:bg-paper/80'
-            )}
-            aria-label={`切换到第 ${index + 1} 张`}
-          />
-        ))}
-      </div>
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            aria-label="上一张"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            aria-label="下一张"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
     </div>
   )
 }
