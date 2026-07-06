@@ -1,54 +1,57 @@
 import { useMemo } from 'react'
 
-const petalVars = ['var(--petal-1)', 'var(--petal-2)', 'var(--petal-3)']
+const petalVars = [
+  { color: 'var(--petal-1)', glow: 'rgba(194,59,34,0.5)' },
+  { color: 'var(--petal-2)', glow: 'rgba(224,102,90,0.5)' },
+  { color: 'var(--petal-3)', glow: 'rgba(242,166,160,0.5)' },
+]
 
-function PlumPetalSVG({ color, size, rotateX, rotateY }) {
+function PlumPetalSVG({ color, glowColor, size }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 30 30"
+      viewBox="0 0 100 100"
       fill="none"
-      className="overflow-visible"
-      style={{
-        transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transformStyle: 'preserve-3d',
-      }}
+      className="overflow-visible dark:drop-shadow-[0_0_6px_var(--glow)]"
+      style={{ '--glow': glowColor }}
     >
-  {/* 5瓣梅花 — 真实梅花瓣形状：顶部有小凹口，底部圆润，整体扁宽 */}
+      {/* 5瓣梅花 — 真实梅花瓣形状：顶部有小凹口，底部圆润，整体扁宽 */}
       {[0, 72, 144, 216, 288].map((angle, i) => (
-        <g key={i} transform={`rotate(${angle} 15 15)`}>
+        <g key={i} transform={`rotate(${angle} 50 50)`}>
           <path
-            d="M15 15C13 12 9 7 11 2Q13 0.5 15 1.5Q17 0.5 19 2C21 7 17 12 15 15Z"
+            d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z"
             fill={color}
             opacity="0.9"
           />
         </g>
       ))}
-      <circle cx="15" cy="15" r="3" fill={color} opacity="0.7" />
+      <circle cx="50" cy="50" r="10" fill={color} opacity="0.7" />
     </svg>
   )
 }
 
 export default function PlumBlossoms() {
   const petals = useMemo(() => {
-    return Array.from({ length: 24 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      size: 10 + Math.random() * 12,
-      color: petalVars[Math.floor(Math.random() * petalVars.length)],
-      duration: 10 + Math.random() * 8,
-      delay: Math.random() * 15,
-      sway: Math.random() * 60 - 30,
-      rotateX: Math.random() * 360,
-      rotateY: Math.random() * 360,
-      rotateXSpeed: 0.5 + Math.random() * 1.5,
-      rotateYSpeed: 0.5 + Math.random() * 1.5,
-    }))
+    return Array.from({ length: 18 }, (_, i) => {
+      const variant = petalVars[Math.floor(Math.random() * petalVars.length)]
+      return {
+        id: i,
+        left: `${Math.random() * 100}%`,
+        size: 14 + Math.random() * 14,
+        color: variant.color,
+        glowColor: variant.glow,
+        duration: 10 + Math.random() * 8,
+        delay: Math.random() * 15,
+        sway: Math.random() * 60 - 30,
+        rotateX: Math.random() * 360,
+        rotateY: Math.random() * 360,
+      }
+    })
   }, [])
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {petals.map((petal) => (
         <div
           key={petal.id}
@@ -57,11 +60,10 @@ export default function PlumBlossoms() {
             left: petal.left,
             animationDuration: `${petal.duration}s`,
             animationDelay: `${petal.delay}s`,
-            opacity: 0,
           }}
         >
           <div
-            className="relative dark:drop-shadow-[0_0_8px_rgba(255,100,100,0.6)]"
+            className="relative"
             style={{
               width: petal.size,
               height: petal.size,
@@ -78,9 +80,8 @@ export default function PlumBlossoms() {
             >
               <PlumPetalSVG
                 color={petal.color}
+                glowColor={petal.glowColor}
                 size={petal.size}
-                rotateX={petal.rotateX}
-                rotateY={petal.rotateY}
               />
             </div>
           </div>
