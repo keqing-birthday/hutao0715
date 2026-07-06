@@ -210,10 +210,11 @@ export default function Navbar() {
             {themeOpen && (
               <div
                 role="menu"
-                className="absolute top-full right-0 mt-2 w-56 p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)] bg-card/95 animate-fade-up"
+                className="absolute top-full right-0 mt-2 w-56 p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)]  animate-fade-up"
                 style={{
-                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                  backdropFilter: 'blur(12px) saturate(180%)',
+                  background: 'rgba(var(--color-card), 0.85)',
                 }}
               >
                 {themeOptions.map(({ key, label, icon: Icon }) => {
@@ -266,8 +267,9 @@ export default function Navbar() {
         <div
           className="hidden md:block absolute top-full right-4 xl:right-[4vw] mt-2 w-72 p-4 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)] bg-card/95 animate-fade-up"
           style={{
-            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+            backdropFilter: 'blur(12px) saturate(180%)',
+            background: 'rgba(var(--color-card), 0.85)',
           }}
         >
           <div className="flex items-center gap-3 mb-3">
@@ -333,8 +335,9 @@ export default function Navbar() {
         <div
           className="md:hidden absolute top-full right-4 left-auto mt-2 w-72 max-w-[calc(100%-2rem)] p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.1)] bg-card/95 animate-fade-up"
           style={{
-            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+            backdropFilter: 'blur(12px) saturate(180%)',
+            background: 'rgba(var(--color-card), 0.85)',
           }}
         >
           <ul className="flex flex-col gap-1">

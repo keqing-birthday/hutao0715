@@ -43,10 +43,13 @@ export default {
       animation: {
         flame: 'flame-pulse 0.5s ease-in-out infinite alternate',
         fall: 'fall linear infinite',
+        'fall-3d': 'fall-3d linear infinite',
         float: 'float 20s ease-in-out infinite',
         butterfly: 'butterfly 18s ease-in-out infinite',
         'fade-up': 'fade-up 0.8s ease-out both',
         lantern: 'lantern-float 6s ease-in-out infinite',
+        ripple: 'ripple 0.6s ease-out forwards',
+        'spin-slow': 'spin 8s linear infinite',
       },
       keyframes: {
         'flame-pulse': {
@@ -62,6 +65,12 @@ export default {
           '10%': { opacity: '0.8' },
           '90%': { opacity: '0.6' },
           '100%': { transform: 'translateY(110vh) translateX(30px) rotate(360deg)', opacity: '0' },
+        },
+        'fall-3d': {
+          '0%': { transform: 'translateY(-10vh) translateX(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg)', opacity: '0' },
+          '10%': { opacity: '0.8' },
+          '90%': { opacity: '0.6' },
+          '100%': { transform: 'translateY(110vh) translateX(40px) rotateX(360deg) rotateY(180deg) rotateZ(720deg)', opacity: '0' },
         },
         float: {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.3' },
@@ -83,6 +92,10 @@ export default {
         'lantern-float': {
           '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.15' },
           '50%': { transform: 'translateY(-20px) scale(1.05)', opacity: '0.25' },
+        },
+        ripple: {
+          '0%': { transform: 'scale(0)', opacity: '0.5' },
+          '100%': { transform: 'scale(2.5)', opacity: '0' },
         },
       },
     },

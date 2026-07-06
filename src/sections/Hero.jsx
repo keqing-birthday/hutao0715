@@ -12,14 +12,70 @@ const CAROUSEL_IMAGES = [
   '/images/f0a609999ca21704e13438a0ac7eb435_3079362125314025578.webp',
 ]
 
+function PlumDecoration({ className, size = 24 }) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M12 2C12 2 10 8 10 10C10 12 11 13 12 13C13 13 14 12 14 10C14 8 12 2 12 2Z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M2 12C2 12 8 10 10 10C12 10 13 11 12 12C13 13 12 14 10 14C8 14 2 12 2 12Z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M22 12C22 12 16 10 14 10C12 10 11 11 12 12C11 13 12 14 14 14C16 14 22 12 22 12Z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <path
+        d="M12 22C12 22 10 16 10 14C10 12 11 11 12 12C13 11 14 12 14 14C14 16 12 22 12 22Z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+      <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.6" />
+    </svg>
+  )
+}
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <Butterflies count={5} />
 
-      {/* 背景光晕 */}
+      {/* 水墨/梅花剪影背景装饰层 */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
+        <svg className="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="plum-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+              <circle cx="50" cy="50" r="30" fill="currentColor" opacity="0.5" />
+              <circle cx="150" cy="150" r="25" fill="currentColor" opacity="0.4" />
+              <circle cx="100" cy="180" r="20" fill="currentColor" opacity="0.3" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#plum-pattern)" />
+        </svg>
+      </div>
+
+      {/* 宣纸纹理背景 */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-[0.02] dark:opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* 背景光晕 - 视差滚动 */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl pointer-events-none parallax-glow"
         style={{ background: 'radial-gradient(circle, var(--hero-glow), transparent 70%)' }}
       />
 
@@ -33,23 +89,58 @@ export default function Hero() {
               </Tag>
             </div>
 
-            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6">
-              <span
-                className="inline-block text-plum"
-                style={{
-                  transform: 'rotate(-3deg)',
-                  textShadow: 'var(--hero-text-glow)',
-                }}
-              >
-                雪
-              </span>
-              <span
-                className="inline-block text-paper"
-                style={{
-                  textShadow: 'var(--hero-text-glow)',
-                }}
-              >
-                霁梅香
+            {/* 标题错落排版 */}
+            <h1 className="text-display text-5xl md:text-7xl lg:text-8xl mb-6 relative">
+              <span className="relative inline-flex items-baseline">
+                <span
+                  className="inline-block text-plum"
+                  style={{
+                    transform: 'rotate(-3deg) translateY(-2px)',
+                    textShadow: 'var(--hero-text-glow)',
+                  }}
+                >
+                  雪
+                </span>
+                <span
+                  className="inline-block text-paper"
+                  style={{
+                    transform: 'rotate(-1deg) translateY(1px)',
+                    textShadow: 'var(--hero-text-glow)',
+                    marginLeft: '0.05em',
+                  }}
+                >
+                  霁
+                </span>
+                <span
+                  className="inline-block text-paper"
+                  style={{
+                    transform: 'rotate(2deg) translateY(-1px)',
+                    textShadow: 'var(--hero-text-glow)',
+                    marginLeft: '0.05em',
+                  }}
+                >
+                  梅
+                </span>
+                <span
+                  className="inline-block text-paper"
+                  style={{
+                    transform: 'rotate(4deg) translateY(2px)',
+                    textShadow: 'var(--hero-text-glow)',
+                    marginLeft: '0.05em',
+                  }}
+                >
+                  香
+                </span>
+                {/* 梅花装饰 */}
+                <PlumDecoration
+                  className="absolute -top-4 -right-6 text-plum/40 dark:text-plum/30 animate-float"
+                  size={28}
+                />
+                <PlumDecoration
+                  className="absolute -bottom-2 -left-4 text-plum/30 dark:text-plum/20 animate-float"
+                  size={20}
+                  style={{ animationDelay: '1s' }}
+                />
               </span>
             </h1>
 

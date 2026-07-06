@@ -62,6 +62,28 @@
     transform-origin: right center;
     opacity: 0.5;
   }
+
+  /* 滚动触发动画 */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 错开延迟 */
+  .scroll-stagger-1 { transition-delay: 0.1s; }
+  .scroll-stagger-2 { transition-delay: 0.2s; }
+  .scroll-stagger-3 { transition-delay: 0.3s; }
+  .scroll-stagger-4 { transition-delay: 0.4s; }
+  .scroll-stagger-5 { transition-delay: 0.5s; }
+  .scroll-stagger-6 { transition-delay: 0.6s; }
+  .scroll-stagger-7 { transition-delay: 0.7s; }
+  .scroll-stagger-8 { transition-delay: 0.8s; }
 }
 
 @layer utilities {
@@ -165,5 +187,188 @@ html {
   }
   100% {
     left: 100%;
+  }
+}
+
+/* 涟漪动画 */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ── 开屏动画：梅花枝头生长 ── */
+
+/* 主干生长 */
+.intro-branch-main {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: branch-grow 1.4s ease-out forwards;
+}
+
+/* 分叉枝干 */
+.intro-branch-1 {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: branch-grow 1.0s ease-out 0.6s forwards;
+}
+
+.intro-branch-2 {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: branch-grow 0.9s ease-out 0.8s forwards;
+}
+
+.intro-branch-3 {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: branch-grow 0.7s ease-out 1.0s forwards;
+}
+
+.intro-branch-4 {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 150;
+  animation: branch-grow 0.7s ease-out 1.1s forwards;
+}
+
+.intro-branch-5 {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: branch-grow 0.6s ease-out 1.2s forwards;
+}
+
+@keyframes branch-grow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 花苞出现 */
+.intro-bud {
+  transition: opacity 0.4s ease-out;
+}
+
+/* 花朵绽放 */
+.intro-flower {
+  transition: opacity 0.5s ease-out;
+}
+
+.intro-flower > g {
+  animation: flower-bloom-pop 0.5s ease-out both;
+}
+
+@keyframes flower-bloom-pop {
+  0% { transform: scale(0.2) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(5deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* 开屏飘落花瓣 */
+@keyframes fall-intro {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(420px) translateX(30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall-intro {
+  animation: fall-intro linear forwards;
+  position: absolute;
+}
+
+/* 3D 花瓣飘落 */
+@keyframes fall-3d {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) translateX(40px) rotateX(360deg) rotateY(180deg) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sway-3d {
+  0% {
+    transform: translateX(-20px) rotateZ(-5deg);
+  }
+  100% {
+    transform: translateX(20px) rotateZ(5deg);
+  }
+}
+
+@keyframes rotate-3d {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+/* 视差滚动 — 光晕 */
+.parallax-glow {
+  will-change: transform;
+}
+
+/* 下划线动画 */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: rgb(var(--color-plum));
+  transition: width 0.3s ease-out, left 0.3s ease-out;
+  border-radius: 1px;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* 视差效果滚动 */
+@media (prefers-reduced-motion: no-preference) {
+  .parallax-glow {
+    animation: parallax-glow 1s linear forwards;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+  }
+}
+
+@keyframes parallax-glow {
+  0% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-100px);
   }
 }

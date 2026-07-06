@@ -26,11 +26,52 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-ink pt-16 pb-8 overflow-hidden">
-      {/* 彼岸花装饰 */}
+      {/* 梅花装饰 */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
-        <div className="absolute bottom-0 left-[10%] text-6xl opacity-15">🌺</div>
-        <div className="absolute bottom-0 right-[15%] text-5xl opacity-12">🌸</div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-7xl opacity-10">🌺</div>
+        {/* 左侧梅花 */}
+        <div className="absolute bottom-0 left-[10%] opacity-15" style={{ width: 60, height: 60 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-1)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-1)" opacity="0.7" />
+          </svg>
+        </div>
+        {/* 右侧梅花 */}
+        <div className="absolute bottom-0 right-[15%] opacity-12" style={{ width: 48, height: 48 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-2)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-2)" opacity="0.7" />
+          </svg>
+        </div>
+        {/* 中间梅花 */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-10" style={{ width: 72, height: 72 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-3)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-3)" opacity="0.7" />
+          </svg>
+        </div>
+      </div>
+
+      {/* 卷轴装饰顶部 */}
+      <div className="absolute top-0 left-0 right-0 h-6 pointer-events-none overflow-hidden">
+        <div className="w-full h-full relative">
+          {/* 卷轴轴头装饰 */}
+          <div className="absolute top-0 left-4 w-8 h-6 rounded-b-full bg-earth/30 border-b border-earth/40" />
+          <div className="absolute top-0 right-4 w-8 h-6 rounded-b-full bg-earth/30 border-b border-earth/40" />
+          {/* 卷轴中间纹理 */}
+          <div className="absolute top-0 left-12 right-12 h-4 border-b border-dashed border-earth/20" />
+        </div>
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 text-center">
@@ -45,7 +86,14 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
             {/* 群二维码 */}
             <div className="relative group">
-              <div className="p-2 bg-card/70 backdrop-blur-sm rounded-xl border border-card-border shadow-sm">
+              <div
+                className="p-2 rounded-xl border border-card-border shadow-sm"
+                style={{
+                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                  backdropFilter: 'blur(12px) saturate(180%)',
+                  background: 'rgba(var(--color-card), 0.6)',
+                }}
+              >
                 <img
                   src="/images/qr-320.webp"
                   alt="交流群二维码"
@@ -60,7 +108,14 @@ export default function Footer() {
             {/* 群号与复制按钮 */}
             <div className="flex flex-col items-center sm:items-start gap-3">
               <p className="text-paper-dim text-sm">或搜索群号加入</p>
-              <div className="flex items-center gap-3">
+              <div
+                className="flex items-center gap-3 p-3 rounded-xl border border-card-border/60"
+                style={{
+                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                  backdropFilter: 'blur(12px) saturate(180%)',
+                  background: 'rgba(var(--color-card), 0.6)',
+                }}
+              >
                 <span className="text-title text-2xl sm:text-3xl text-paper tracking-wider">
                   {GROUP_NUMBER}
                 </span>

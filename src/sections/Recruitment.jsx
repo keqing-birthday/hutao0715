@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Music, Film, Palette, PenTool, Drama, Mic, Sparkles } from 'lucide-react'
 import Card from '../components/ui/Card'
 import Tag from '../components/ui/Tag'
@@ -48,10 +49,28 @@ const roles = [
 ]
 
 export default function Recruitment() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('scroll-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const elements = document.querySelectorAll('#recruitment .animate-on-scroll')
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="recruitment" className="relative py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-on-scroll">
           <div className="divider-gradient mb-8" />
           <h2 className="text-title text-3xl md:text-4xl text-paper mb-4">
             📋 招募大厅
@@ -62,21 +81,23 @@ export default function Recruitment() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {roles.map((role) => {
+          {roles.map((role, i) => {
             const Icon = role.icon
             return (
-              <Card key={role.title} className="flex flex-col">
-                <div className="w-12 h-12 rounded-full bg-plum/10 flex items-center justify-center mb-4">
-                  <Icon className="text-plum" size={24} />
-                </div>
-                <h3 className="text-title text-xl text-paper mb-2">{role.title}</h3>
-                <p className="text-paper-dim text-sm mb-4 flex-1">{role.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {role.tags.map((tag) => (
-                    <Tag key={tag} className="text-xs">{tag}</Tag>
-                  ))}
-                </div>
-              </Card>
+              <div key={role.title} className={`animate-on-scroll scroll-stagger-${Math.min(i + 1, 8)}`}>
+                <Card className="flex flex-col">
+                  <div className="w-12 h-12 rounded-full bg-plum/10 flex items-center justify-center mb-4">
+                    <Icon className="text-plum" size={24} />
+                  </div>
+                  <h3 className="text-title text-xl text-paper mb-2">{role.title}</h3>
+                  <p className="text-paper-dim text-sm mb-4 flex-1">{role.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {role.tags.map((tag) => (
+                      <Tag key={tag} className="text-xs">{tag}</Tag>
+                    ))}
+                  </div>
+                </Card>
+              </div>
             )
           })}
         </div>
