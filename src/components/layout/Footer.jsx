@@ -26,11 +26,41 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-ink pt-16 pb-8 overflow-hidden">
-      {/* 彼岸花装饰 */}
+      {/* 梅花装饰 */}
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
-        <div className="absolute bottom-0 left-[10%] text-6xl opacity-15">🌺</div>
-        <div className="absolute bottom-0 right-[15%] text-5xl opacity-12">🌸</div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-7xl opacity-10">🌺</div>
+        {/* 左侧梅花 */}
+        <div className="absolute bottom-0 left-[10%] opacity-15" style={{ width: 60, height: 60 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-1)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-1)" opacity="0.7" />
+          </svg>
+        </div>
+        {/* 右侧梅花 */}
+        <div className="absolute bottom-0 right-[15%] opacity-12" style={{ width: 48, height: 48 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-2)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-2)" opacity="0.7" />
+          </svg>
+        </div>
+        {/* 中间梅花 */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-10" style={{ width: 72, height: 72 }}>
+          <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
+            {[0, 72, 144, 216, 288].map((a, i) => (
+              <g key={i} transform={`rotate(${a} 50 50)`}>
+                <path d="M50 50C46 44 38 34 42 24Q46 21 50 23Q54 21 58 24C62 34 54 44 50 50Z" fill="var(--petal-3)" />
+              </g>
+            ))}
+            <circle cx="50" cy="50" r="8" fill="var(--petal-3)" opacity="0.7" />
+          </svg>
+        </div>
       </div>
 
       {/* 卷轴装饰顶部 */}
