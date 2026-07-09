@@ -2,18 +2,39 @@ import Tag from '../components/ui/Tag'
 
 const POSTERS = [
   {
-    src: '/images/23B22C87A93D9C77459F6A2585AF4229.webp',
+    src: '/images/poster-2026-main.webp',
     alt: '线下活动主海报',
   },
   {
-    src: '/images/5F752DAB9A50DD7D286690F989DE7236.webp',
-    alt: '郑州场海报',
+    src: '/images/poster-2026-cities.webp',
+    alt: '六城联动主海报',
   },
   {
-    src: '/images/61CA8874BE7702944F0E2B364D48B9B1.webp',
-    alt: '上海场海报',
+    src: '/images/poster-2026-details.webp',
+    alt: '全国线下痛楼打卡地址详情',
   },
 ]
+
+function PosterCard({ poster, className = '', children }) {
+  return (
+    <a
+      key={poster.src}
+      href={poster.src}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group block relative rounded-2xl overflow-hidden bg-card border border-card-border shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${className}`}
+    >
+      <img
+        src={poster.src}
+        alt={poster.alt}
+        className="w-full h-auto object-contain"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none" />
+      {children}
+    </a>
+  )
+}
 
 export default function OfflineEvents() {
   return (
@@ -31,24 +52,24 @@ export default function OfflineEvents() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {POSTERS.map((poster) => (
-            <a
-              key={poster.src}
-              href={poster.src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block relative rounded-2xl overflow-hidden bg-card border border-card-border shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              <img
-                src={poster.src}
-                alt={poster.alt}
-                className="w-full h-auto object-contain"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none" />
-            </a>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+          {POSTERS.slice(0, 2).map((poster) => (
+            <PosterCard key={poster.src} poster={poster} />
           ))}
+        </div>
+
+        <div className="mt-8 md:mt-10">
+          <PosterCard
+            poster={POSTERS[2]}
+            className="max-w-3xl mx-auto max-h-[70vh]"
+          >
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ink/90 to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
+              <span className="px-4 py-1.5 rounded-full text-sm text-paper bg-ink/70 border border-paper/10 backdrop-blur-sm">
+                点击查看完整大图
+              </span>
+            </div>
+          </PosterCard>
         </div>
       </div>
     </section>
