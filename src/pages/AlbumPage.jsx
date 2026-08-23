@@ -105,7 +105,7 @@ function GalleryGrid({ images, onSelect }) {
           key={item.name + index}
           type="button"
           onClick={() => onSelect(index)}
-          className={`group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-lg border border-card-border bg-card text-left shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-plum/60 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-plum sm:mb-6 animate-on-scroll scroll-stagger-${Math.min(index + 1, 8)}`}
+          className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-lg border border-card-border bg-card text-left shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-plum/60 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-plum sm:mb-6"
           aria-label={`查看大图：${item.name}`}
         >
           <img
