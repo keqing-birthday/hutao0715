@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import {
   Menu,
   X,
@@ -18,20 +19,35 @@ import {
 } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 
-const navLinks = [
-  { label: '首页', href: '#', icon: Home },
-  { label: '招募大厅', href: '#recruitment', icon: ScrollText },
-  { label: '关于我们', href: '#about', icon: Users },
-  { label: '图集', href: '#gallery', icon: Images },
-  { label: '制作人员', href: '#credits', icon: BadgeCheck },
+const navItems = [
+  { label: '首页', to: '/', type: 'route', icon: Home },
+  { label: '招募大厅', to: 'recruitment', type: 'scroll', icon: ScrollText },
+  { label: '关于我们', to: 'about', type: 'scroll', icon: Users },
+  { label: '图集', to: '/album', type: 'route', icon: Images },
+  { label: '制作人员', to: 'credits', type: 'scroll', icon: BadgeCheck },
 ]
 
 export default function Navbar() {
+  const location = useLocation()
   const [open, setOpen] = useState(false)
   const [playerOpen, setPlayerOpen] = useState(false)
   const { theme, resolvedTheme, setTheme } = useTheme()
   const [themeOpen, setThemeOpen] = useState(false)
   const themePopoverRef = useRef(null)
+
+  const isHome = location.pathname === '/'
+
+  const handleNavClick = (item, e) => {
+    if (item.type === 'scroll') {
+      e.preventDefault()
+      if (isHome) {
+        document.getElementById(item.to)?.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.location.hash = `/#/?section=${item.to}`
+      }
+      setOpen(false)
+    }
+  }
 
   useEffect(() => {
     if (!themeOpen) return
@@ -152,8 +168,8 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
+        <Link
+          to="/"
           className="btn-plain flex items-center gap-2.5 h-12 px-4 rounded-xl text-paper font-bold text-lg shrink-0"
         >
           <img
@@ -162,21 +178,36 @@ export default function Navbar() {
             className="h-7 w-7 object-contain rounded-lg"
           />
           <span className="text-title hidden sm:inline">胡桃生日会</span>
-        </a>
+        </Link>
 
         {/* Desktop nav - centered */}
         <ul className="hidden lg:flex items-center justify-center gap-1">
-          {navLinks.map((link) => {
-            const Icon = link.icon
+          {navItems.map((item) => {
+            const Icon = item.icon
+            const content = (
+              <>
+                <Icon size={16} strokeWidth={1.9} />
+                <span>{item.label}</span>
+              </>
+            )
             return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
-                >
-                  <Icon size={16} strokeWidth={1.9} />
-                  <span>{link.label}</span>
-                </a>
+              <li key={item.to + item.type}>
+                {item.type === 'route' ? (
+                  <Link
+                    to={item.to}
+                    className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
+                  >
+                    {content}
+                  </Link>
+                ) : (
+                  <a
+                    href={`#${item.to}`}
+                    onClick={(e) => handleNavClick(item, e)}
+                    className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
+                  >
+                    {content}
+                  </a>
+                )}
               </li>
             )
           })}
@@ -347,18 +378,32 @@ export default function Navbar() {
             className="lg:hidden fixed top-20 right-4 z-[60] w-72 max-w-[calc(100%-2rem)] p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.22)] bg-card animate-fade-up"
           >
             <ul className="flex flex-col gap-1">
-            {navLinks.map((link) => {
-              const Icon = link.icon
+            {navItems.map((item) => {
+              const Icon = item.icon
               return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="btn-plain flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
-                    onClick={() => setOpen(false)}
-                  >
-                    <Icon size={17} strokeWidth={1.9} />
-                    <span>{link.label}</span>
-                  </a>
+                <li key={item.to + item.type}>
+                  {item.type === 'route' ? (
+                    <Link
+                      to={item.to}
+                      className="btn-plain flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
+                      onClick={() => setOpen(false)}
+                    >
+                      <Icon size={17} strokeWidth={1.9} />
+                      <span>{item.label}</span>
+                    </Link>
+                  ) : (
+                    <a
+                      href={`#${item.to}`}
+                      className="btn-plain flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
+                      onClick={(e) => {
+                        handleNavClick(item, e)
+                        setOpen(false)
+                      }}
+                    >
+                      <Icon size={17} strokeWidth={1.9} />
+                      <span>{item.label}</span>
+                    </a>
+                  )}
                 </li>
               )
             })}
