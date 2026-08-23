@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { members } from '../data/members'
+import { featuredMembers } from '../data/members'
 import MemberCard from '../components/MemberCard'
 
 export default function About() {
@@ -35,7 +35,7 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {members.map((member, i) => (
+          {featuredMembers.map((member, i) => (
             <div key={member.name} className={`animate-on-scroll scroll-stagger-${Math.min(i + 1, 8)}`}>
               <MemberCard member={member} />
             </div>

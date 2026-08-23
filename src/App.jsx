@@ -8,6 +8,8 @@ import SkeletonLoader from './components/loading/SkeletonLoader'
 
 const Recruitment = lazy(() => import('./sections/Recruitment'))
 const About = lazy(() => import('./sections/About'))
+const Gallery = lazy(() => import('./sections/Gallery'))
+const Credits = lazy(() => import('./sections/Credits'))
 const OfflineEvents = lazy(() => import('./sections/OfflineEvents'))
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Suspense fallback={<SkeletonLoader />}>
           <Recruitment />
           <About />
+          <Gallery />
+          <Credits />
         </Suspense>
       </main>
       <Suspense fallback={<SkeletonLoader />}>

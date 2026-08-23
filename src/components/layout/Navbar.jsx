@@ -5,6 +5,8 @@ import {
   Home,
   ScrollText,
   Users,
+  Images,
+  BadgeCheck,
   Music,
   Sun,
   Moon,
@@ -20,6 +22,8 @@ const navLinks = [
   { label: '首页', href: '#', icon: Home },
   { label: '招募大厅', href: '#recruitment', icon: ScrollText },
   { label: '关于我们', href: '#about', icon: Users },
+  { label: '图集', href: '#gallery', icon: Images },
+  { label: '制作人员', href: '#credits', icon: BadgeCheck },
 ]
 
 export default function Navbar() {
@@ -137,7 +141,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center">
+    <header className="fixed top-0 left-0 right-0 z-50 isolate flex justify-center">
       <audio ref={audioRef} preload="none" />
 
       <nav
@@ -161,14 +165,14 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav - centered */}
-        <ul className="hidden md:flex items-center justify-center gap-1">
+        <ul className="hidden lg:flex items-center justify-center gap-1">
           {navLinks.map((link) => {
             const Icon = link.icon
             return (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="btn-plain flex items-center gap-2 h-10 px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
+                  className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
                 >
                   <Icon size={16} strokeWidth={1.9} />
                   <span>{link.label}</span>
@@ -181,7 +185,7 @@ export default function Navbar() {
         {/* Right utilities */}
         <div className="flex items-center justify-end gap-1 shrink-0">
           <button
-            className="btn-plain hidden md:flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors relative"
+            className="btn-plain hidden lg:flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors relative"
             aria-label={playerOpen ? '收起音乐播放器' : '展开音乐播放器'}
             onClick={() => setPlayerOpen(!playerOpen)}
           >
@@ -192,7 +196,7 @@ export default function Navbar() {
           </button>
 
           {/* Theme selector */}
-          <div className="relative hidden md:block" ref={themePopoverRef}>
+          <div className="relative hidden lg:block" ref={themePopoverRef}>
             <button
               className="btn-plain flex items-center justify-center w-11 h-11 rounded-xl text-paper-dim hover:text-plum transition-colors"
               aria-label="切换主题"
@@ -253,7 +257,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden btn-plain flex items-center justify-center w-10 h-10 rounded-xl text-paper hover:text-plum transition-colors"
+            className="lg:hidden btn-plain flex items-center justify-center w-10 h-10 rounded-xl text-paper hover:text-plum transition-colors"
             onClick={() => setOpen(!open)}
             aria-label="切换菜单"
           >
@@ -265,7 +269,7 @@ export default function Navbar() {
       {/* Music player dropdown */}
       {playerOpen && (
         <div
-          className="hidden md:block absolute top-full right-4 xl:right-[4vw] mt-2 w-72 p-4 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)] bg-card/95 animate-fade-up"
+          className="hidden lg:block absolute top-full right-4 xl:right-[4vw] mt-2 w-72 p-4 rounded-2xl border border-card-border/60 shadow-[0_8px_30px_rgba(var(--color-shade),0.15)] bg-card/95 animate-fade-up"
           style={{
             WebkitBackdropFilter: 'blur(12px) saturate(180%)',
             backdropFilter: 'blur(12px) saturate(180%)',
@@ -332,15 +336,17 @@ export default function Navbar() {
 
       {/* Mobile nav */}
       {open && (
-        <div
-          className="md:hidden absolute top-full right-4 left-auto mt-2 w-72 max-w-[calc(100%-2rem)] p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.1)] bg-card/95 animate-fade-up"
-          style={{
-            WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-            backdropFilter: 'blur(12px) saturate(180%)',
-            background: 'rgba(var(--color-card), 0.85)',
-          }}
-        >
-          <ul className="flex flex-col gap-1">
+        <>
+          <button
+            type="button"
+            className="lg:hidden fixed inset-0 z-[55] cursor-default bg-ink/70"
+            aria-label="关闭菜单"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className="lg:hidden fixed top-20 right-4 z-[60] w-72 max-w-[calc(100%-2rem)] p-2 rounded-2xl border border-card-border/60 shadow-[0_8px_32px_rgba(var(--color-shade),0.22)] bg-card animate-fade-up"
+          >
+            <ul className="flex flex-col gap-1">
             {navLinks.map((link) => {
               const Icon = link.icon
               return (
@@ -436,8 +442,9 @@ export default function Navbar() {
                 })}
               </div>
             </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
+        </>
       )}
     </header>
   )
