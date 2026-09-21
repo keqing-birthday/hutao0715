@@ -48,6 +48,16 @@ export default function Navbar() {
     }
   }
 
+  // 点击「当前所在页面」的导航项（如首页点首页）时，Link 不会触发导航，
+  // 这里兜底：清掉查询参数并滚回顶部
+  const handleRouteClick = (item, e) => {
+    if (location.pathname !== item.to) return
+    e.preventDefault()
+    if (location.search) navigate(item.to, { replace: true })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setOpen(false)
+  }
+
   useEffect(() => {
     if (!themeOpen) return
     const handle = (e) => {
@@ -169,6 +179,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           to="/"
+          onClick={(e) => handleRouteClick({ to: '/' }, e)}
           className="btn-plain flex items-center gap-2.5 h-12 px-4 rounded-xl text-paper font-bold text-lg shrink-0"
         >
           <img
@@ -194,6 +205,7 @@ export default function Navbar() {
                 {item.type === 'route' ? (
                   <Link
                     to={item.to}
+                    onClick={(e) => handleRouteClick(item, e)}
                     className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
                   >
                     {content}
@@ -377,7 +389,10 @@ export default function Navbar() {
                     <Link
                       to={item.to}
                       className="btn-plain flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => {
+                        handleRouteClick(item, e)
+                        setOpen(false)
+                      }}
                     >
                       <Icon size={17} strokeWidth={1.9} />
                       <span>{item.label}</span>
