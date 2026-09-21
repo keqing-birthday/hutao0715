@@ -1,4 +1,7 @@
+import { useState } from 'react'
+import { Expand } from 'lucide-react'
 import Tag from '../components/ui/Tag'
+import Lightbox from '../components/ui/Lightbox'
 
 const POSTERS = [
   {
@@ -15,28 +18,41 @@ const POSTERS = [
   },
 ]
 
-function PosterCard({ poster, className = '', children }) {
+const POSTER_ITEMS = POSTERS.map((poster) => ({ url: poster.src, alt: poster.alt }))
+
+function PosterCard({ poster, index, onOpen, className = '', children }) {
   return (
-    <a
-      key={poster.src}
-      href={poster.src}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`group block relative rounded-2xl overflow-hidden bg-card border border-card-border shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${className}`}
+    <button
+      type="button"
+      onClick={() => onOpen(index)}
+      aria-label={`查看大图：${poster.alt}`}
+      className={`group block w-full text-left relative rounded-2xl overflow-hidden bg-card border border-card-border shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-plum ${className}`}
     >
       <img
         src={poster.src}
         alt={poster.alt}
-        className="w-full h-auto object-contain"
+        className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
         loading="lazy"
       />
       <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none" />
+      <span className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-paper/20 bg-ink/75 text-paper opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <Expand size={17} aria-hidden="true" />
+      </span>
       {children}
-    </a>
+    </button>
   )
 }
 
 export default function OfflineEvents() {
+  const [lightbox, setLightbox] = useState(null)
+
+  const openAt = (index) => setLightbox({ index })
+  const closeLightbox = () => setLightbox(null)
+  const showPrevious = () =>
+    setLightbox((s) => (s ? { index: (s.index + POSTER_ITEMS.length - 1) % POSTER_ITEMS.length } : s))
+  const showNext = () =>
+    setLightbox((s) => (s ? { index: (s.index + 1) % POSTER_ITEMS.length } : s))
+
   return (
     <section id="offline" className="relative py-20 md:py-28 bg-ink">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,14 +69,16 @@ export default function OfflineEvents() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-          {POSTERS.slice(0, 2).map((poster) => (
-            <PosterCard key={poster.src} poster={poster} />
+          {POSTERS.slice(0, 2).map((poster, index) => (
+            <PosterCard key={poster.src} poster={poster} index={index} onOpen={openAt} />
           ))}
         </div>
 
         <div className="mt-8 md:mt-10">
           <PosterCard
             poster={POSTERS[2]}
+            index={2}
+            onOpen={openAt}
             className="max-w-3xl mx-auto max-h-[70vh]"
           >
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ink/90 to-transparent pointer-events-none" />
@@ -72,6 +90,16 @@ export default function OfflineEvents() {
           </PosterCard>
         </div>
       </div>
+
+      {lightbox && (
+        <Lightbox
+          items={POSTER_ITEMS}
+          activeIndex={lightbox.index}
+          onClose={closeLightbox}
+          onPrevious={showPrevious}
+          onNext={showNext}
+        />
+      )}
     </section>
   )
 }

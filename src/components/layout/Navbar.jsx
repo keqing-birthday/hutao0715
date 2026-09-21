@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   Menu,
   X,
@@ -27,6 +27,7 @@ const navItems = [
 
 export default function Navbar() {
   const location = useLocation()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [playerOpen, setPlayerOpen] = useState(false)
   const { theme, resolvedTheme, setTheme } = useTheme()
@@ -41,7 +42,7 @@ export default function Navbar() {
       if (isHome) {
         document.getElementById(item.to)?.scrollIntoView({ behavior: 'smooth' })
       } else {
-        window.location.hash = `/?section=${item.to}`
+        navigate(`/?section=${item.to}`)
       }
       setOpen(false)
     }
@@ -199,7 +200,7 @@ export default function Navbar() {
                   </Link>
                 ) : (
                   <a
-                    href={`#${item.to}`}
+                    href={`/?section=${item.to}`}
                     onClick={(e) => handleNavClick(item, e)}
                     className="btn-plain flex items-center gap-2 h-10 px-3 xl:px-4 text-[15px] font-medium text-paper-dim hover:text-plum rounded-xl transition-colors duration-200"
                   >
@@ -383,7 +384,7 @@ export default function Navbar() {
                     </Link>
                   ) : (
                     <a
-                      href={`#${item.to}`}
+                      href={`/?section=${item.to}`}
                       className="btn-plain flex items-center gap-2.5 h-10 px-4 text-paper-dim hover:text-plum rounded-xl transition-colors"
                       onClick={(e) => {
                         handleNavClick(item, e)

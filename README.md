@@ -19,7 +19,7 @@
 - [Vite](https://vitejs.dev/) 6
 - [React](https://react.dev/) 19
 - [Tailwind CSS](https://tailwindcss.com/) 3
-- [React Router](https://reactrouter.com/) 7（`HashRouter`）
+- [React Router](https://reactrouter.com/) 7（`BrowserRouter`，静态托管依靠 Cloudflare Pages 的 SPA 回退）
 - [lucide-react](https://lucide.dev/) 图标
 - `clsx` + `tailwind-merge`（`src/lib/utils.js` 的 `cn` 工具）
 
@@ -54,7 +54,7 @@ node scripts/optimize-images.mjs
 | `/` | 首页：开屏动画、Hero、招募大厅、贡献成员、线下活动 |
 | `/album` | 图集相册页：OpenList 目录自动枚举 + 大图浏览 |
 
-首页板块支持通过查询参数直达：`/#/?section=recruitment`（可选值：`recruitment`、`credits`）。
+首页板块支持通过查询参数直达：`/?section=recruitment`（可选值：`recruitment`、`credits`）。
 
 ## 目录结构
 

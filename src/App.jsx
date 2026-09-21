@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useCallback, useEffect } from 'react'
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import PlumBlossoms from './components/effects/PlumBlossoms'
@@ -70,12 +70,12 @@ function HomePage() {
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/album" element={<AlbumPage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 

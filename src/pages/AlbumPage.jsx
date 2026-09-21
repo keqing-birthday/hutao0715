@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  ChevronLeft,
-  ChevronRight,
   Expand,
-  X,
   ArrowLeft,
   RefreshCw,
   Images,
@@ -15,108 +12,12 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import PlumBlossoms from '../components/effects/PlumBlossoms'
 import Tag from '../components/ui/Tag'
+import Lightbox from '../components/ui/Lightbox'
 import { listAlbum, loadFolderCover, listFolderFiles, ALBUM_PATH } from '../services/openlist'
 import { usePagedImages } from '../hooks/usePagedImages'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const PAGE_SIZE = 24
-
-/* ---------- Lightbox ---------- */
-
-function AlbumLightbox({ items, activeIndex, onClose, onPrevious, onNext }) {
-  const closeButtonRef = useRef(null)
-  const closingRef = useRef(false)
-  const [closing, setClosing] = useState(false)
-  const item = items[activeIndex]
-
-  // 先播放关闭动画，动画结束后再真正卸载
-  const requestClose = useCallback(() => {
-    if (closingRef.current) return
-    closingRef.current = true
-    setClosing(true)
-    window.setTimeout(onClose, 160)
-  }, [onClose])
-
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeButtonRef.current?.focus()
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') requestClose()
-      if (event.key === 'ArrowLeft') onPrevious()
-      if (event.key === 'ArrowRight') onNext()
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.body.style.overflow = previousOverflow
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onNext, onPrevious, requestClose])
-
-  if (!item) return null
-
-  return (
-    <div
-      className={`fixed inset-0 z-[70] flex items-center justify-center bg-ink/90 p-4 sm:p-8 backdrop-blur-md motion-reduce:animate-none ${
-        closing ? 'animate-lightbox-backdrop-out' : 'animate-lightbox-backdrop'
-      }`}
-      role="dialog"
-      aria-modal="true"
-      aria-label="查看图片"
-      onClick={requestClose}
-    >
-      <div
-        className="relative flex h-full w-full max-w-6xl items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          ref={closeButtonRef}
-          type="button"
-          onClick={requestClose}
-          className="absolute right-0 top-0 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-paper/20 bg-ink/75 text-paper transition-colors hover:border-plum hover:text-plum focus:outline-none focus-visible:ring-2 focus-visible:ring-plum"
-          aria-label="关闭大图浏览"
-        >
-          <X size={22} aria-hidden="true" />
-        </button>
-
-        {items.length > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={onPrevious}
-              className="absolute left-0 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-paper/20 bg-ink/75 text-paper transition-colors hover:border-plum hover:text-plum focus:outline-none focus-visible:ring-2 focus-visible:ring-plum"
-              aria-label="查看上一张图片"
-            >
-              <ChevronLeft size={24} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={onNext}
-              className="absolute right-0 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-paper/20 bg-ink/75 text-paper transition-colors hover:border-plum hover:text-plum focus:outline-none focus-visible:ring-2 focus-visible:ring-plum"
-              aria-label="查看下一张图片"
-            >
-              <ChevronRight size={24} aria-hidden="true" />
-            </button>
-          </>
-        )}
-
-        <figure
-          className={`flex max-h-full max-w-[calc(100%-3.5rem)] flex-col items-center motion-reduce:animate-none ${
-            closing ? 'animate-lightbox-image-out' : 'animate-lightbox-image'
-          }`}
-        >
-          <img
-            src={item.url}
-            alt="图集照片"
-            className="max-h-[78vh] max-w-full rounded-lg object-contain shadow-2xl"
-          />
-        </figure>
-      </div>
-    </div>
-  )
-}
 
 /* ---------- Gallery Grid ---------- */
 
@@ -465,7 +366,7 @@ export default function AlbumPage() {
       <Footer showContact={false} showGroupNumber={false} />
 
       {lightbox && (
-        <AlbumLightbox
+        <Lightbox
           items={lightbox.items}
           activeIndex={lightbox.index}
           onClose={closeLightbox}
