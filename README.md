@@ -51,7 +51,7 @@ node scripts/optimize-images.mjs
 
 | 路径 | 说明 |
 | --- | --- |
-| `/` | 首页：开屏动画、Hero、招募大厅、制作人员、线下活动 |
+| `/` | 首页：开屏动画、Hero、招募大厅、贡献成员、线下活动 |
 | `/album` | 图集相册页：OpenList 目录自动枚举 + 大图浏览 |
 
 首页板块支持通过查询参数直达：`/#/?section=recruitment`（可选值：`recruitment`、`credits`）。
@@ -76,7 +76,7 @@ src/
     Countdown.jsx
     MemberCard.jsx
   data/
-    members.js           # 成员 / 制作人员数据
+    members.js           # 成员 / 贡献成员数据
   hooks/
     useScrollAnimation.js
     useTheme.js
@@ -115,11 +115,11 @@ src/
 > 注意：匿名访问时 `refresh` 必须为 `false`，传 `true` 会返回 403。
 > 图集网格使用统一 **4:3** 卡片占位，保证图片未加载时也有高度，否则底部哨兵会一直停留在视口内导致连续拉取多批。
 
-## 成员与制作人员
+## 成员与贡献成员
 
 所有成员信息集中在 `src/data/members.js`：
 
-- `credits: [{ groupId, role }]` 决定成员在「制作人员」各分组中的展示与职责
+- `credits: [{ groupId, role }]` 决定成员在「贡献成员」各分组中的展示与职责
 - `bilibili` 填写哔哩哔哩个人空间链接，留空则不显示跳转
 
 ## 部署

@@ -11,7 +11,7 @@ export default function Credits() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14 animate-on-scroll">
           <div className="mb-4 flex justify-center">
-            <Tag className="text-base px-4 py-1.5">✦ 制作人员</Tag>
+            <Tag className="text-base px-4 py-1.5">✦ 贡献成员</Tag>
           </div>
           <h2 className="text-title text-3xl md:text-4xl text-paper mb-4">引蝶共作</h2>
           <p className="text-paper-dim max-w-2xl mx-auto">
@@ -28,11 +28,15 @@ export default function Credits() {
                   <p className="text-sm text-paper-dim">{group.description}</p>
                 )}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {group.members.map(({ member, role }) => (
-                  <MemberCard key={`${group.id}-${member.id}-${role}`} member={member} role={role} />
-                ))}
-              </div>
+              {group.members.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {group.members.map(({ member, role }) => (
+                    <MemberCard key={`${group.id}-${member.id}-${role}`} member={member} role={role} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-paper-dim/60">成员待补充</p>
+              )}
             </div>
           ))}
         </div>

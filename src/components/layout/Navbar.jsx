@@ -21,7 +21,7 @@ import { useTheme } from '../../hooks/useTheme'
 const navItems = [
   { label: '首页', to: '/', type: 'route', icon: Home },
   { label: '招募大厅', to: 'recruitment', type: 'scroll', icon: ScrollText },
-  { label: '制作人员', to: 'credits', type: 'scroll', icon: BadgeCheck },
+  { label: '贡献成员', to: 'credits', type: 'scroll', icon: BadgeCheck },
   { label: '图集', to: '/album', type: 'route', icon: Images },
 ]
 
