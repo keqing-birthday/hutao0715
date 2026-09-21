@@ -206,7 +206,7 @@ export default function AlbumPage() {
               </div>
               <h1 className="text-title text-3xl md:text-4xl text-paper mb-3">光影留存</h1>
               <p className="text-paper-dim max-w-xl">
-                每一张画面都承载着相遇与心意。点击单图可查看完整大图，图片源自动同步 OpenList 目录。
+                每一张画面都承载着相遇与心意。点击单图可查看完整大图。
               </p>
             </div>
           </div>
@@ -258,7 +258,7 @@ export default function AlbumPage() {
         </div>
       </main>
 
-      <Footer />
+      <Footer showContact={false} showGroupNumber={false} />
 
       {activeIndex !== null && (
         <AlbumLightbox

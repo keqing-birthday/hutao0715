@@ -9,7 +9,6 @@ import SkeletonLoader from './components/loading/SkeletonLoader'
 import AlbumPage from './pages/AlbumPage'
 
 const Recruitment = lazy(() => import('./sections/Recruitment'))
-const About = lazy(() => import('./sections/About'))
 const Credits = lazy(() => import('./sections/Credits'))
 const OfflineEvents = lazy(() => import('./sections/OfflineEvents'))
 
@@ -58,7 +57,6 @@ function HomePage() {
         <Hero />
         <Suspense fallback={<SkeletonLoader />}>
           <Recruitment />
-          <About />
           <Credits />
         </Suspense>
       </main>

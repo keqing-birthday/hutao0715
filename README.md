@@ -51,10 +51,10 @@ node scripts/optimize-images.mjs
 
 | 路径 | 说明 |
 | --- | --- |
-| `/` | 首页：开屏动画、Hero、招募大厅、关于我们、制作人员、线下活动 |
+| `/` | 首页：开屏动画、Hero、招募大厅、制作人员、线下活动 |
 | `/album` | 图集相册页：OpenList 目录自动枚举 + 大图浏览 |
 
-首页板块支持通过查询参数直达：`/#/?section=recruitment`（可选值：`recruitment`、`about`、`credits`）。
+首页板块支持通过查询参数直达：`/#/?section=recruitment`（可选值：`recruitment`、`credits`）。
 
 ## 目录结构
 
@@ -84,7 +84,7 @@ src/
     utils.js             # cn() 样式合并工具
   pages/
     AlbumPage.jsx        # 图集相册页
-  sections/              # 首页板块（Hero / Recruitment / About / Credits / OfflineEvents）
+  sections/              # 首页板块（Hero / Recruitment / Credits / OfflineEvents）
   services/
     openlist.js          # OpenList API 客户端
   App.jsx                # 路由与页面组装
@@ -109,7 +109,6 @@ src/
 
 所有成员信息集中在 `src/data/members.js`：
 
-- `featured: true` 的成员出现在首页「关于我们」核心成员区
 - `credits: [{ groupId, role }]` 决定成员在「制作人员」各分组中的展示与职责
 - `bilibili` 填写哔哩哔哩个人空间链接，留空则不显示跳转
 

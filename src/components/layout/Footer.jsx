@@ -3,7 +3,7 @@ import { Copy, Check } from 'lucide-react'
 
 const GROUP_NUMBER = '693766057'
 
-export default function Footer() {
+export default function Footer({ showContact = true, showGroupNumber = true }) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -78,68 +78,70 @@ export default function Footer() {
         <div className="divider-gradient mb-8" />
 
         {/* 联系方式 */}
-        <div className="mb-10">
-          <h3 className="text-title text-xl md:text-2xl text-paper mb-6">
-            联系我们
-          </h3>
+        {showContact && (
+          <div className="mb-10">
+            <h3 className="text-title text-xl md:text-2xl text-paper mb-6">
+              联系我们
+            </h3>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
-            {/* 群二维码 */}
-            <div className="relative group">
-              <div
-                className="p-2 rounded-xl border border-card-border shadow-sm"
-                style={{
-                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-                  backdropFilter: 'blur(12px) saturate(180%)',
-                  background: 'rgba(var(--color-card), 0.6)',
-                }}
-              >
-                <img
-                  src="/images/qr-320.webp"
-                  alt="交流群二维码"
-                  className="w-36 h-36 sm:w-40 sm:h-40 object-cover rounded-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p className="text-xs text-paper-dim/60 mt-2">扫码加入交流群</p>
-            </div>
-
-            {/* 群号与复制按钮 */}
-            <div className="flex flex-col items-center sm:items-start gap-3">
-              <p className="text-paper-dim text-sm">或搜索群号加入</p>
-              <div
-                className="flex items-center gap-3 p-3 rounded-xl border border-card-border/60"
-                style={{
-                  WebkitBackdropFilter: 'blur(12px) saturate(180%)',
-                  backdropFilter: 'blur(12px) saturate(180%)',
-                  background: 'rgba(var(--color-card), 0.6)',
-                }}
-              >
-                <span className="text-title text-2xl sm:text-3xl text-paper tracking-wider">
-                  {GROUP_NUMBER}
-                </span>
-                <button
-                  onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-btn bg-plum/10 text-plum border border-plum/25 hover:bg-plum/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-plum"
-                  aria-label="复制群号"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+              {/* 群二维码 */}
+              <div className="relative group">
+                <div
+                  className="p-2 rounded-xl border border-card-border shadow-sm"
+                  style={{
+                    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                    backdropFilter: 'blur(12px) saturate(180%)',
+                    background: 'rgba(var(--color-card), 0.6)',
+                  }}
                 >
-                  {copied ? (
-                    <>
-                      <Check size={14} />
-                      <span>已复制</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy size={14} />
-                      <span>复制</span>
-                    </>
-                  )}
-                </button>
+                  <img
+                    src="/images/qr-320.webp"
+                    alt="交流群二维码"
+                    className="w-36 h-36 sm:w-40 sm:h-40 object-cover rounded-lg"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <p className="text-xs text-paper-dim/60 mt-2">扫码加入交流群</p>
+              </div>
+
+              {/* 群号与复制按钮 */}
+              <div className="flex flex-col items-center sm:items-start gap-3">
+                <p className="text-paper-dim text-sm">或搜索群号加入</p>
+                <div
+                  className="flex items-center gap-3 p-3 rounded-xl border border-card-border/60"
+                  style={{
+                    WebkitBackdropFilter: 'blur(12px) saturate(180%)',
+                    backdropFilter: 'blur(12px) saturate(180%)',
+                    background: 'rgba(var(--color-card), 0.6)',
+                  }}
+                >
+                  <span className="text-title text-2xl sm:text-3xl text-paper tracking-wider">
+                    {GROUP_NUMBER}
+                  </span>
+                  <button
+                    onClick={handleCopy}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-btn bg-plum/10 text-plum border border-plum/25 hover:bg-plum/15 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-plum"
+                    aria-label="复制群号"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={14} />
+                        <span>已复制</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} />
+                        <span>复制</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <h3 className="text-title text-lg md:text-xl text-paper mb-2">
           胡桃生日会
@@ -154,7 +156,7 @@ export default function Footer() {
         </p>
 
         <p className="text-sm text-paper-dim/80 mb-8">
-          由胡桃生贺组「引蝶杯」制作 · QQ群：693766057
+          {`由胡桃生贺组「引蝶杯」制作${showGroupNumber ? ` · QQ群：${GROUP_NUMBER}` : ''}`}
         </p>
 
         <p className="text-xs text-paper-dim/50 mb-2">

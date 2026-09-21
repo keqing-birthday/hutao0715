@@ -161,7 +161,7 @@ export default function Hero() {
               <a href="#recruitment">
                 <Button showFire={false}>立即加入招募</Button>
               </a>
-              <a href="#about">
+              <a href="#credits">
                 <Button variant="secondary">了解我们</Button>
               </a>
             </div>

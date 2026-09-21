@@ -24,7 +24,9 @@ export default function Credits() {
             <div key={group.id} className={`animate-on-scroll scroll-stagger-${Math.min(groupIndex + 1, 8)}`}>
               <div className="mb-6 flex flex-col gap-2 border-l-2 border-plum/70 pl-4 sm:flex-row sm:items-end sm:justify-between">
                 <h3 className="text-title text-2xl text-paper">{group.title}</h3>
-                <p className="text-sm text-paper-dim">{group.description}</p>
+                {group.description && (
+                  <p className="text-sm text-paper-dim">{group.description}</p>
+                )}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {group.members.map(({ member, role }) => (
