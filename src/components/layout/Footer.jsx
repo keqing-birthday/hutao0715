@@ -163,7 +163,7 @@ export default function Footer({ showContact = true, showGroupNumber = true }) {
           © 2026 Hutao Birthday Fan Project. All rights reserved.
         </p>
 
-        <p className="text-xs text-paper-dim/50 mb-2">v1.1.1</p>
+        <p className="text-xs text-paper-dim/50 mb-2">v1.2.0</p>
 
         <p className="text-xs text-paper-dim/50 mb-1">
           本网站为同人作品，所涉及的官方游戏角色、图像、音乐等素材版权归米哈游所有。
