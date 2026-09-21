@@ -97,6 +97,14 @@ export const members = [
     avatar: '/images/avatars/7b888c29809caa7bdabf676122496c1c.webp',
     credits: [{ groupId: 'production' }],
   },
+  // 后勤人员
+  {
+    id: 'staff-yuhengxingzhi',
+    name: '玉衡星织',
+    bilibili: 'https://space.bilibili.com/3493106890574497',
+    avatar: '/images/avatars/06c67bfb3ef6c631530e475e29010a20.webp',
+    credits: [{ groupId: 'logistics' }],
+  },
 ]
 
 export const staffGroups = [
@@ -107,6 +115,10 @@ export const staffGroups = [
   {
     id: 'production',
     title: '制作人员',
+  },
+  {
+    id: 'logistics',
+    title: '后勤人员',
   },
 ]
 

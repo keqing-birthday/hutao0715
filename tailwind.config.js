@@ -54,6 +54,7 @@ export default {
         'lightbox-backdrop-out': 'lightbox-backdrop-out 0.16s ease-in both',
         'lightbox-image': 'lightbox-image 0.26s cubic-bezier(0.22, 1, 0.36, 1) both',
         'lightbox-image-out': 'lightbox-image-out 0.16s ease-in both',
+        dropdown: 'dropdown 0.18s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
       keyframes: {
         'flame-pulse': {
@@ -116,6 +117,10 @@ export default {
         'lightbox-image-out': {
           '0%': { opacity: '1', transform: 'scale(1)' },
           '100%': { opacity: '0', transform: 'scale(0.96)' },
+        },
+        dropdown: {
+          '0%': { opacity: '0', transform: 'translateY(-8px) scale(0.96)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
       },
     },
