@@ -50,6 +50,10 @@ export default {
         lantern: 'lantern-float 6s ease-in-out infinite',
         ripple: 'ripple 0.6s ease-out forwards',
         'spin-slow': 'spin 8s linear infinite',
+        'lightbox-backdrop': 'lightbox-backdrop 0.2s ease-out both',
+        'lightbox-backdrop-out': 'lightbox-backdrop-out 0.16s ease-in both',
+        'lightbox-image': 'lightbox-image 0.26s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'lightbox-image-out': 'lightbox-image-out 0.16s ease-in both',
       },
       keyframes: {
         'flame-pulse': {
@@ -96,6 +100,22 @@ export default {
         ripple: {
           '0%': { transform: 'scale(0)', opacity: '0.5' },
           '100%': { transform: 'scale(2.5)', opacity: '0' },
+        },
+        'lightbox-backdrop': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'lightbox-backdrop-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        'lightbox-image': {
+          '0%': { opacity: '0', transform: 'scale(0.94)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'lightbox-image-out': {
+          '0%': { opacity: '1', transform: 'scale(1)' },
+          '100%': { opacity: '0', transform: 'scale(0.96)' },
         },
       },
     },
