@@ -185,7 +185,7 @@ export default function AlbumPage() {
       <Navbar />
 
       <main className="pt-28 pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div ref={containerRef} className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 animate-on-scroll">
             <div>
@@ -212,7 +212,7 @@ export default function AlbumPage() {
           </div>
 
           {/* Content */}
-          <div ref={containerRef}>
+          <div>
             {/* Loading */}
             {loading && (
               <div className="rounded-lg border border-card-border bg-card/40 py-20 text-center">

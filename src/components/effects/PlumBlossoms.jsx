@@ -67,15 +67,13 @@ export default function PlumBlossoms() {
             style={{
               width: petal.size,
               height: petal.size,
-              animation: `sway-3d ${petal.duration * 0.6}s ease-in-out infinite alternate`,
-              animationDelay: `${petal.delay}s`,
+              animation: `sway-3d ${petal.duration * 0.6}s ease-in-out ${petal.delay}s infinite alternate`,
             }}
           >
             <div
               className="w-full h-full"
               style={{
-                animation: `rotate-3d ${8 + Math.random() * 6}s linear infinite`,
-                animationDelay: `${petal.delay}s`,
+                animation: `rotate-3d ${8 + Math.random() * 6}s linear ${petal.delay}s infinite`,
               }}
             >
               <PlumPetalSVG

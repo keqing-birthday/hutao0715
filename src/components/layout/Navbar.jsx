@@ -43,7 +43,7 @@ export default function Navbar() {
       if (isHome) {
         document.getElementById(item.to)?.scrollIntoView({ behavior: 'smooth' })
       } else {
-        window.location.hash = `/#/?section=${item.to}`
+        window.location.hash = `/?section=${item.to}`
       }
       setOpen(false)
     }

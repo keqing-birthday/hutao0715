@@ -18,12 +18,25 @@ function ScrollToSection() {
   useEffect(() => {
     const params = new URLSearchParams(location.search)
     const section = params.get('section')
-    if (section) {
+    if (!section) return
+
+    // 目标板块可能是 lazy 加载的，挂载后元素才存在，因此轮询等待再滚动
+    let attempts = 0
+    let timer
+    const tryScroll = () => {
       const el = document.getElementById(section)
       if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100)
+        el.scrollIntoView({ behavior: 'smooth' })
+        return
+      }
+      if (attempts < 40) {
+        attempts += 1
+        timer = setTimeout(tryScroll, 50)
       }
     }
+
+    timer = setTimeout(tryScroll, 100)
+    return () => clearTimeout(timer)
   }, [location])
   return null
 }
