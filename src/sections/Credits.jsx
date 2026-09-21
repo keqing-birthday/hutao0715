@@ -7,7 +7,7 @@ export default function Credits() {
   const containerRef = useScrollAnimation()
 
   return (
-    <section id="credits" ref={containerRef} className="relative bg-card/20 py-24 px-4 sm:px-6 lg:px-8">
+    <section id="credits" ref={containerRef} className="relative py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14 animate-on-scroll">
           <div className="mb-4 flex justify-center">
